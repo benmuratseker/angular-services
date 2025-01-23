@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from './product.model';
 //import { productsArray } from './products-data';
 import { ProductsService } from './products.service';
+import { CartService } from '@core/cart.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -12,7 +13,7 @@ export class CatalogComponent implements OnInit {
   
   // products: Product[] = productsArray;
   products: Product[] = [];
-  private cart: Product[] = [];
+  //private cart: Product[] = [];
 
   //adding productService without dependency injection
   // constructor() { 
@@ -24,13 +25,14 @@ export class CatalogComponent implements OnInit {
   //   this.products = this.productService.getProducts();
   // }
 
-  constructor(private productsService : ProductsService){}
+  constructor(private productsService : ProductsService, private cartService : CartService){}
   //best way to inject dependencies is onInit
   ngOnInit() {
     this.products = this.productsService.getProducts();
   }
 
   addToCart(product: Product) {
-    this.cart.push(product);
+    //this.cart.push(product);
+    this.cartService.add(product)
   }
 }

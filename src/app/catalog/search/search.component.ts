@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 //import { productsArray } from '../products-data'
 import { ProductsService } from '@catalog/products.service';
+import { CartService } from '@core/cart.service';
 
 @Component({
   selector: 'bot-search',
@@ -12,9 +13,9 @@ export class SearchComponent implements OnInit{
   // products: Product[] = [...productsArray];
   products: Product[] = [];
   searchTerm: string = '';
-  cart: Product[] = [];
+  //cart: Product[] = [];
 
-  constructor(private productsService : ProductsService) { }
+  constructor(private productsService : ProductsService, private cartService: CartService) { }
 
   ngOnInit() {
     //this.products = [...productsArray];
@@ -22,7 +23,8 @@ export class SearchComponent implements OnInit{
   }
 
   addToCart(product: Product) {
-    this.cart.push(product);
+    //this.cart.push(product);
+    this.cartService.add(product);
   }
 
   filter(event: Event) {
