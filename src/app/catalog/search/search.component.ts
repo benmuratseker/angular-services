@@ -17,9 +17,15 @@ export class SearchComponent implements OnInit{
 
   constructor(private productsService : ProductsService, private cartService: CartService) { }
 
+  // ngOnInit() {
+  //   //this.products = [...productsArray];
+  //   this.products = this.productsService.getProducts();
+  // }
+
   ngOnInit() {
-    //this.products = [...productsArray];
-    this.products = this.productsService.getProducts();
+    //this.products = this.productsService.getProducts();
+    this.productsService.getProducts().subscribe((products) => this.products = products);
+    setTimeout(() => this.productsService.refreshProducts(), 200);
   }
 
   addToCart(product: Product) {
