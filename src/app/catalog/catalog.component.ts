@@ -29,6 +29,7 @@ export class CatalogComponent implements OnInit {
   //best way to inject dependencies is onInit
   ngOnInit() {
     this.products = this.productsService.getProducts();
+    setTimeout(() => this.productsService.refreshProducts(), 3000);
   }
 
   addToCart(product: Product) {
