@@ -5,16 +5,20 @@ import { Product } from "@shared/product.model";
 export class CartService {
 
     // cart : Product[] = [];
-    cart = signal<Product []>([]);
+    private cartItems = signal<Product []>([]);
+
+    get cart(){
+      return this.cartItems.asReadonly();
+    }
 
     add(product: Product) {
         //this.cart.push(product);
-        this.cart.update((oldCart) => [...oldCart, product]);
+        this.cartItems.update((oldCart) => [...oldCart, product]);
     }
 
     remove(product: Product) {
         //this.cart = this.cart.filter( p => p!== product);
-        this.cart.update((oldCart) => oldCart.filter(p => p!== product));
+        this.cartItems.update((oldCart) => oldCart.filter(p => p!== product));
     }
 
   //   get cartTotal() {
@@ -25,7 +29,7 @@ export class CartService {
   //  }
 
   get cartTotal() {
-    return computed(() => this.cart().reduce((prev, next) => {
+    return computed(() => this.cartItems().reduce((prev, next) => {
       let discount = next.discount && next.discount > 0 ? 1 - next.discount : 1;
       return prev + next.price * discount;
     }, 0));
