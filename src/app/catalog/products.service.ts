@@ -1,5 +1,5 @@
 import { Product } from "@shared/product.model";
-import { productsArray } from './products-data';
+//import { productsArray } from './products-data';
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 
@@ -12,7 +12,7 @@ export class ProductsService {
         return this.products;
     }
 
-    refreshProducts() {
-        this.products.next(productsArray);
-    }
+    // refreshProducts() {
+    //     this.products.next(productsArray);
+    // }
 }
