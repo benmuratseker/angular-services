@@ -17,10 +17,10 @@ import { CartService } from '@core/cart.service';
   imports: [BrowserModule, AppRoutingModule, FormsModule, CatalogModule, HttpClientModule],
   providers: [
     //CartService
-    {
-      provide: CartService,
-      useClass: CartService,
-    }
+    // {
+    //   provide: CartService,
+    //   useClass: CartService,
+    // }
   ],
   bootstrap: [AppComponent],
 })
