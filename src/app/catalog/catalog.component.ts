@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Product } from './product.model';
 //import { productsArray } from './products-data';
 import { ProductsService } from './products.service';
-import { CART_SERVICE_TOKEN, CartService } from '@core/cart.service';
+import { CartService } from '@core/cart.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -36,7 +36,7 @@ export class CatalogComponent {
   constructor(
     private productsService : ProductsService, 
     //private cartService : CartService
-    @Inject(CART_SERVICE_TOKEN) private cartService : CartService//after provider defined
+    private cartService : CartService//after provider defined
   ){}
   
   //best way to inject dependencies is onInit
