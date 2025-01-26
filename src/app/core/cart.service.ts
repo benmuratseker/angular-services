@@ -1,24 +1,26 @@
-import { computed, Injectable, InjectionToken, signal } from "@angular/core";
+import { computed, Inject, Injectable, InjectionToken, signal } from "@angular/core";
 import { Product } from "@shared/product.model";
 
 //to set persistant cart. if reload the page items will be in the cart
 type CartOptions = {
-  persistencType: string,
+  persistenceType: string,
   persistenceKey: string,
 };
+
+export const CART_OPTIONS_TOKEN = new InjectionToken<CartOptions>('CART_OPTIONS');
 
 @Injectable({providedIn: 'root'})
 export class CartService {
 
     // cart : Product[] = [];
     private cartItems = signal<Product []>([]);
-    private cartOptions: CartOptions = {
-      persistencType: 'local',
-      persistenceKey: 'cart'
-    };
+    // private cartOptions: CartOptions = {
+    //   persistencType: 'local',
+    //   persistenceKey: 'cart'
+    // };
 
-    constructor(){
-      if (this.cartOptions && this.cartOptions.persistencType === 'local') {
+    constructor(@Inject(CART_OPTIONS_TOKEN) private cartOptions : CartOptions){
+      if (this.cartOptions && this.cartOptions.persistenceType === 'local') {
         const cartString = localStorage.getItem(this.cartOptions.persistenceKey);
         const cart: Product[] = cartString ? JSON.parse(cartString) as Product[] : [];
         this.cartItems.set(cart);
@@ -49,7 +51,7 @@ export class CartService {
   //  }
 
   private storeCart() {
-    if (this.cartOptions && this.cartOptions.persistencType === 'local'){
+    if (this.cartOptions && this.cartOptions.persistenceType === 'local'){
       localStorage.setItem(this.cartOptions.persistenceKey, JSON.stringify(this.cartItems()));
     }
   }
