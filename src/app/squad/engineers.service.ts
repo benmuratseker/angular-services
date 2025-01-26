@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Product } from "@shared/product.model";
-import { IProductService } from "@shared/produtcs-service.interface";
-import { Observable } from "rxjs";
+import { IProductsService } from "@shared/produtcs-service.interface";
+import { Observable, of } from "rxjs";
+import { engineers } from "./squad-catalog/engineers";
 
 @Injectable({providedIn: 'root'})
-export class EngineersService implements IProductService {
+export class EngineersService implements IProductsService {
     getProducts(): Observable<Product[]> {
-        
+        return of(engineers);;
     }
 }
