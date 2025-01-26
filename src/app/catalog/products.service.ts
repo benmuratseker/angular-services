@@ -3,9 +3,10 @@ import { Product } from "@shared/product.model";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { IProductService } from "@shared/produtcs-service.interface";
 
 @Injectable({ providedIn: 'root' })
-export class ProductsService {
+export class ProductsService implements IProductService{
     private products : Subject<Product[]> = new Subject();
 
     constructor(private httpClient : HttpClient){}//need to add module to app.module too
