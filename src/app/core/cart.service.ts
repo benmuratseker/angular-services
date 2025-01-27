@@ -2,10 +2,11 @@ import { computed, Inject, Injectable, InjectionToken, signal } from "@angular/c
 import { Product } from "@shared/product.model";
 
 //to set persistant cart. if reload the page items will be in the cart
-type CartOptions = {
+export type CartOptions = {
   persistenceType: string,
   persistenceKey: string,
 };
+//exported to use as provider
 
 export const CART_OPTIONS_TOKEN = new InjectionToken<CartOptions>('CART_OPTIONS');
 
